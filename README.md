@@ -106,14 +106,13 @@ curl localhost:8080/api/timeout
 ```
 
 #### 2.1.2 Desafio - Timeout
-Ajustar configurações de timeout e corrigir erro de timeout execedido ao invocar o serviço
+Ajustar configurações de timeout e corrigir erro de timeout excedido ao invocar o serviço
 
 ![Screen Shot 2024-09-13 at 21 42 04](https://github.com/user-attachments/assets/a451d1a1-ef3f-4116-8ab0-246d6548b7a3)
 
 ```
-// INSIRA SUA ANÁLISE OU PARECER ABAIXO
 
-
+Foi identificado que a chamada do serviço externo estava levando mais tempo do que a chamado da api, dessa forma causou a exceção de timeout. Para a resolução desse problema, foi configurado o tempo de timeout da api superior ao da chamada do serviço externo. 
 
 ```
 
@@ -178,10 +177,7 @@ Alterar limite de requisições permitidas para 100 num intervalo de 1 minuto e 
 
 
 ```
-// INSIRA SUA ANÁLISE OU PARECER ABAIXO
-
-
-
+Foi realizada a alteração do limite de requisições de 5 para 100, ou seja, o limite de requisições simultâneas da aplicação é de 100 requisições por minuto. Ao realizar um teste com 101 requisições, na 100 requisição a aplicação começou a retornar a mensagem "Rate Limit Excedido - Você excedeu o limite de requisições, tente novamente mais tarde.". Dessa forma foi possível validar a configuração do rate limit da aplicação.
 ```
 
 
@@ -245,10 +241,7 @@ Aumentar quantidade de chamadas simultâneas e avaliar o comportamento.
 
 
 ```
-// INSIRA SUA ANÁLISE OU PARECER ABAIXO
-
-
-
+Foi identificado que a aplicação suporta 2 chamadas simultâneas, para testar o comportamento do bulkhead foi criado um script realizando 5 chamadas simultâneas as quais 2 chamadas obtiveram sucesso e as demais apresentaram erro. 
 ```
 
 
@@ -326,10 +319,7 @@ Ajustar o o percentual de falhas para que o circuit breaker obtenha sucesso ao r
 Observar comportamento do circuito no console.
 
 ```
-// INSIRA SUA ANÁLISE OU PARECER ABAIXO
-
-
-
+O Circuit Breaker está configurado para abrir o circuito quando 50% das requisições falharem, protegendo o sistema contra falhas em cascata. Nos testes, o fallback foi acionado em 4 de 30 requisições, indicando que o circuito abriu temporariamente devido a falhas simuladas. Ajustar o percentual de falhas para um valor mais alto pode reduzir a frequência de abertura, permitindo maior tolerância antes de acionar o fallback.
 ```
 
 ---
